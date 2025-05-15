@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+      - webappnet
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build: .
+    container_name: points_calculator
+    ports:
+      - "8000:8000"
+    env_file: .env
+    depends_on:
+      - mysql
+    networks:
+      - webappnet
+
+volumes:
+  mysql-data:
+  
+networks:
+  webappnet:
