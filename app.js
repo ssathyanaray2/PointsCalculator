@@ -20,10 +20,12 @@ app.get('/', (_, res) => {
 
 app.use('/receipts', pointsCalculatorRouter);
 
-//In large scale applications, we can create custom middleware for logging and error handling, but I have used inbuilt middleware for simplicity.
-app.use((req, res, next) => {
-  console.log('404 error: ', req.method, req.url);
-  res.status(404).json({ message: 'Route not found' });
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    console.error('Bad JSON:', err.message);
+    return res.status(400).send('The receipt is invalid.');
+  }
+  next(err);
 });
 
 app.use((err, req, res, next)  => {
