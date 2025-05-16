@@ -8,9 +8,10 @@ A simple receipt processor
 
 **Backend**: Express.js
 
-**Database**: MySQL
+**Database**: MySQL 
 
 **Deployment**: Docker, Docker compose
+
 -----------------------------------------------------------------------
 
 # Requirement to run the code
@@ -27,7 +28,14 @@ download docker desktop
 
 I have used mysql docker image for database and have created init.sql file to add initial dummy data. After running the above command docker will take a minute to pull the image and start running.
 
-URL to access the backent: http://localhost:8000
+
+
+URL to access the backent: **http://localhost:8000**
+
+process receipts: **http://localhost:8000/receipts/process**
+
+get points replace the id part: **http://localhost:8000/receipts/{id}/points**
+
 
 -----------------------------------------------------------------------
 
